@@ -6,8 +6,7 @@
             <div class="col-md-12">
 
                 <h1>Crea un nuovo post</h1>
-
-                <form method="POST" action={{ route('admin.posts.store') }}>
+                <form method="POST" action="{{ route('admin.posts.store') }}">
 
                     @csrf
 
