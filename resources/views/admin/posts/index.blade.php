@@ -24,7 +24,21 @@
                                 <td>{{ $post->title }}</td>
                                 <td>{{ substr($post->content, 0, 30) }}</td>
                                 <td>{{ $post->slug }}</td>
-                                <td>
+                                <td class="d-flex">
+
+                                    <a href="{{ route('admin.posts.show', ['post' => $post->id]) }}"
+                                        class="btn btn-primary">Vai</a>
+
+                                    <a href="{{ route('admin.posts.edit', ['post' => $post->id]) }}"
+                                        class="btn btn-warning mx-2">Modifica</a>
+
+                                    <form method="POST"
+                                        action="{{ route('admin.posts.destroy', ['post' => $post->id]) }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button onclick="return confirm('Sei sicuro di volerlo eliminare?')" type='submit'
+                                            class="btn btn-danger">Elimina</button>
+                                    </form>
 
                                 </td>
                             </tr>
