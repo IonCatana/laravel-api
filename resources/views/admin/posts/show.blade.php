@@ -11,6 +11,7 @@
                         <h5 class="card-title">{{ $post->title }}</h5>
                         <p class="card-text">{!! $post->content !!}</p>
                         <h5 class="card-title">{{ $post->slug }}</h5>
+                        <h5 class="card-title">{{ $post->category }}</h5>
                         <a href="{{ route('admin.posts.index') }}" class="btn btn-primary">Torna indietro</a>
                     </div>
 
