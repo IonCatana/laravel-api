@@ -22,10 +22,9 @@ Route::middleware('auth')
     ->group(function () {
         Route::get('/', 'HomeController@index')->name('home');
         Route::resource('posts', 'PostController');
+        Route::resource('tags', 'TagController');
     });
 
 Route::get('{any?}', function () {
     return view('guests.home');
 })->where('any', '.*');
-
-

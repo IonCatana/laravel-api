@@ -25,7 +25,7 @@
                                 <td>{{ $post->title }}</td>
                                 <td>{{ substr($post->content, 0, 30) }}</td>
                                 <td>{{ $post->slug }}</td>
-                                <td>{{ isset($post->category) ? $post->category->name : 'N.D.' }}</td>
+                                <td>{{ isset($post->category) ? $post->category->name : 'N.D.' }}</td>                                
                                 <td class="d-flex">
 
                                     <a href="{{ route('admin.posts.show', ['post' => $post->id]) }}"

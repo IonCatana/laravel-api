@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Category;
 use App\Post;
+use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -31,7 +32,8 @@ class PostController extends Controller
     {
         //
         $categories = Category::all();
-        return view('admin.posts.create', compact('categories'));
+        $tags = Tag::all();
+        return view('admin.posts.create', compact('categories', 'tags'));
     }
 
     /**
@@ -45,7 +47,9 @@ class PostController extends Controller
         //     
         $request->validate([
             'title' => 'required|min:5',
-            'content' => 'required|min:10'
+            'content' => 'required|min:10',
+            'category_id' => 'nullable|exists:categories,id',
+            'tags' => 'nullable|exists:tags,id'
         ]);
         $data = $request->all();
 
@@ -63,7 +67,10 @@ class PostController extends Controller
 
         $post = new Post();
         $post->fill($data);
+        if (isset($data['tags']));
+        $post->tags()->sync($data['tags']);
         $post->save();
+
 
         return redirect()->route('admin.posts.index');
     }
@@ -76,9 +83,8 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
-        $categories = Category::all();
-        return view('admin.posts.show', compact('post', 'categories'));
+        //        
+        return view('admin.posts.show', compact('post'));
     }
 
     /**
@@ -91,7 +97,8 @@ class PostController extends Controller
     {
         //
         $categories = Category::all();
-        return view('admin.posts.edit', compact('post', 'categories'));
+        $tags = Tag::all();
+        return view('admin.posts.edit', compact('post', 'categories', 'tags'));
     }
 
     /**
@@ -107,7 +114,9 @@ class PostController extends Controller
         $request->validate(
             [
                 'title' => 'required|min:5',
-                'content' => 'required|min:10'
+                'content' => 'required|min:10',
+                'category_id' => 'nullable|exists:categories,id',
+                'tags' => 'nullable|exists:tags,id'
             ]
         );
 
@@ -126,6 +135,8 @@ class PostController extends Controller
 
         $post->update($data);
         $post->save();
+        if (isset($data['tags']));
+        $post->tags()->sync($data['tags']);
         return redirect()->route('admin.posts.show', ['post' => $post->id]);
     }
 
