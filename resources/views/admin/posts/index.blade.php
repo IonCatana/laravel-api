@@ -15,6 +15,7 @@
                             <th scope="col">Contenuto</th>
                             <th scope="col">Slug</th>
                             <th scope="col">Categorie</th>
+                            <th scope="col">Tags</th>
                             <th scope="col">Azioni</th>
                         </tr>
                     </thead>
@@ -25,7 +26,8 @@
                                 <td>{{ $post->title }}</td>
                                 <td>{{ substr($post->content, 0, 30) }}</td>
                                 <td>{{ $post->slug }}</td>
-                                <td>{{ isset($post->category) ? $post->category->name : 'N.D.' }}</td>                                
+                                <td>{{ isset($post->category) ? $post->category->name : 'N.D.' }}</td>
+                                <td>{{ $post->tags }}</td>
                                 <td class="d-flex">
 
                                     <a href="{{ route('admin.posts.show', ['post' => $post->id]) }}"
